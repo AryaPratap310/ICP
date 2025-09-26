@@ -1,25 +1,41 @@
 package Day_1;
+
 //question link      https://leetcode.com/problems/sliding-window-maximum/
 
 import java.util.Arrays;
 
 public class Sliding_Window_Maximum {
-
 	class Solution {
-		   public int findMinArrowShots(int[][] points) {
-		        Arrays.sort(points, (a, b) -> Integer.compare(a[1], b[1]));
-		        int arrows = 1;
-		        int reach = points[0][1];
+	public int[] maxSlidingWindow(int[] nums, int k) {
+	  if (nums.length == 0 || k == 0) {
+	    return new int[0];
+	  }
+	  int n = nums.length;
+	  int[] result = new int[n - k + 1];
+	  int[] left = new int[n];
+	  int[] right = new int[n];
 
-		        for (int i = 1; i < points.length; i++) {
-		            if (points[i][0] > reach) {
-		                arrows++;
-		                reach = points[i][1];
-		            }
-		        }
-
-		        return arrows;
-		    }
-		}
-
+	  for (int i = 0; i < n; ++i) {
+	    if (i % k == 0) { 
+	      left[i] = nums[i];
+	    } else {
+	      left[i] = Math.max(left[i - 1], nums[i]);
+	    }
+	    
+	    int temp = (i / k + 1) * k - 1; 
+	    if (temp > n - 1) temp = n - 1;
+	    
+	    int j = temp - i % k;
+	    if (j % k == (k - 1) || j == n - 1) {
+	      right[j] = nums[j];
+	    } else {
+	      right[j] = Math.max(right[j + 1], nums[j]);
+	    }
+	  }
+	  for (int i = 0, j = i + k - 1; j < n; ++i, ++j) {
+	    result[i] = Math.max(right[i], left[j]);
+	  }
+	  return result;
+	    }
+	}
 }
