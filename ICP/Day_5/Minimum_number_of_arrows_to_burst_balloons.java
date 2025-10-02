@@ -1,0 +1,22 @@
+package Day_5;
+
+import java.util.Arrays;
+
+public class Minimum_number_of_arrows_to_burst_balloons {
+	class Solution {
+		   public int findMinArrowShots(int[][] points) {
+		        Arrays.sort(points, (a, b) -> Integer.compare(a[1], b[1]));
+		        int arrows = 1;
+		        int reach = points[0][1];
+
+		        for (int i = 1; i < points.length; i++) {
+		            if (points[i][0] > reach) {
+		                arrows++;
+		                reach = points[i][1];
+		            }
+		        }
+
+		        return arrows;
+		    }
+		}
+}
