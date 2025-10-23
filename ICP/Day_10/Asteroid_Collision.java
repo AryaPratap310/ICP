@@ -1,6 +1,7 @@
 package Day_10;
 import java.util.*;
 
+
 public class Asteroid_Collision {
 	class Solution {
 	    public int[] asteroidCollision(int[] asteroids) {
@@ -35,3 +36,4 @@ public class Asteroid_Collision {
 	    }
 	}
 }
+
